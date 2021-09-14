@@ -1,0 +1,47 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10%;
+}
+
+h2 {
+    font-size: 1em;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 2%;
+}
+
+#start{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+  
+}
+button {
+    background-color: purple;
+    color: whitesmoke;
+    padding: 16px 32px;
+    border: black solid 3px;
+    cursor: pointer;
+}
+
+#timer{
+    position: fixed;
+    top: 4px;
+    right: 4px;
+   
+}
+
+#count-down{
+    background-color: red;
+    color: white;
+    display: none;
+    margin-top: auto;
+}
+
