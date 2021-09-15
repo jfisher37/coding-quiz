@@ -45,6 +45,16 @@ let optionList;
 
 function end() {
     promptEd.innerHTML = "SCORE:"
+    let score = document.createElement("h2");
+    score.innerHTML = rightAnswers*timeRemaining/10;
+    promptEd.appendChild(score);
+    let initials = document.createElement("input");
+    initials.setAttribute("placeholder", "Write initials here.")
+    promptEd.appendChild(initials);
+    let scoreScreenBtn = document.createElement("button");
+    scoreScreenBtn.innerHTML = "NEXT";
+    // scoreScreenBtn.setAttribute("style")
+    promptEd.appendChild(scoreScreenBtn);
 
 }
 
