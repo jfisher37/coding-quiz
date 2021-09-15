@@ -3,25 +3,73 @@ const startBtnEd = document.getElementById("start-button");
 let promptEd = document.getElementById("prompter");
 let instructEd = document.getElementById("instructions");
 let countDownEd = document.getElementById("count-down");
+let optionsEd = document.getElementById("options");
 
 let timeRemaining = 61;
 
 // create objects containing questions and answers.
 let questionOne = {
-    question: "What language is used for styling elements?"
-    wrongOne: ""
-}
+    question: "What language is used for styling elements?",
+    wrongOne: "HTML",
+    wrongTwo: "Javascript",
+    wrongThree: "Java",
+    correct: "CSS",
+};
+
+let questionTwo = {
+    question: "Which is an example of a pseudoelement?",
+    wrongOne: "Titani-eh",
+    wrongTwo: "<title></title>",
+    wrongThree: "No such thing exists",
+    correct: "::after",
+};
+
+let questionThree = {
+    question: "Which is not a browser?",
+    wrongOne: "Google Chrome",
+    wrongTwo: "Safari",
+    wrongThree: "Firefox",
+    correct: "Bing",
+};
+
+let questArr = [questionOne, questionTwo, questionThree];
 
 // WHEN I click the start button
-startBtnEd.addEventListener("click", function(){
+//create a function that puts up questions
+function questgen(){
+        let randIndex = Math.floor(Math.random() * questArr.length);
+        let currentQuest = questArr[randIndex];
+        promptEd.innerHTML = currentQuest.question;
+        let optionList = document.createElement("ul");
+        let optionAzar;
+        let possAnswers = [currentQuest.wrongOne, currentQuest.wrongTwo,
+         currentQuest.wrongThree, currentQuest.correct];
+         for (let i = 0; i < possAnswers.length; i++){
+            let indexAzar = Math.floor(Math.random() * possAnswers.length);
+             optionAzar = document.createElement("li");
+             optionAzar.innerHTML = possAnswers[indexAzar];
+             possAnswers.splice(indexAzar, 1);
+             optionList.appendChild(optionAzar);
+         }
+        optionsEd.appendChild(optionList);
+//         for (let i = 0; i < chosenWord.length; i++){
+//           words.innerHTML += "_ ";
+//             words.innerHTML.splice(i, 1, key)
     
+   
+}
+startBtnEd.addEventListener("click", function(){
+    startBtnEd.style.display = "none";
+    instructEd.style.display = "none";
     countDownEd.style.display = "inline-block";
+    questgen();
     setInterval(function() {
         timeRemaining--;
         console.log(timeRemaining);
         countDownEd.innerHTML = timeRemaining;
-
+        
         //create an array of question objects. set prompter as question, set options as ul with options.
+        
 
         //if correct, next, add it to score
 
