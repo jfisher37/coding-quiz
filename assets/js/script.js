@@ -7,6 +7,8 @@ let optionsEd = document.getElementById("options");
 
 let timeRemaining = 61;
 
+console.log(promptEd.innerHTML);
+
 // create objects containing questions and answers.
 let questionOne = {
     question: "What language is used for styling elements?",
@@ -34,6 +36,10 @@ let questionThree = {
 
 let questArr = [questionOne, questionTwo, questionThree];
 
+let questionsDone;
+let wrongAnswers = 0;
+let rightAnswers = 0;
+
 // WHEN I click the start button
 //create a function that puts up questions
 function questgen(){
@@ -55,6 +61,18 @@ function questgen(){
              optionList.appendChild(optionAzar);
          }
         optionsEd.appendChild(optionList);
+
+        //add event listener for click, if target = correct answer, good, incorrect, bad.
+        console.log(currentQuest.correct);
+        optionList.addEventListener("click", function(e){
+            let selection = e.target;
+            console.log(selection.innerHTML);
+            if (selection.innerHTML === currentQuest.correct){
+                rightAnswers++;
+            }
+            console.log(rightAnswers);
+        })
+
 //         
     
    
