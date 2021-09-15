@@ -4,7 +4,8 @@ let promptEd = document.getElementById("prompter");
 let instructEd = document.getElementById("instructions");
 let countDownEd = document.getElementById("count-down");
 let optionsEd = document.getElementById("options");
-let correctEd = document.getElementById("correct")
+let correctEd = document.getElementById("correct");
+let scoreScreenEd = document.getElementById("score-screen");
 
 let timeRemaining = 61;
 
@@ -44,17 +45,20 @@ let moreQuestions = true;
 let optionList;
 
 function end() {
+    scoreScreenEd.setAttribute("style", "display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; flex-direction: column;");
     promptEd.innerHTML = "SCORE:"
     let score = document.createElement("h2");
     score.innerHTML = rightAnswers*timeRemaining/10;
-    promptEd.appendChild(score);
+    score.setAttribute("style", "margin-top: 15px; font-size: 2em;")
+    scoreScreenEd.appendChild(score);
     let initials = document.createElement("input");
     initials.setAttribute("placeholder", "Write initials here.")
-    promptEd.appendChild(initials);
-    let scoreScreenBtn = document.createElement("button");
-    scoreScreenBtn.innerHTML = "NEXT";
-    // scoreScreenBtn.setAttribute("style")
-    promptEd.appendChild(scoreScreenBtn);
+    initials.setAttribute("style", "margin-top: 15px")
+    scoreScreenEd.appendChild(initials);
+    let toScoreBtn = document.createElement("button");
+    toScoreBtn.innerHTML = "NEXT";
+    toScoreBtn.setAttribute("style", "margin-top: 15px")
+    scoreScreenEd.appendChild(toScoreBtn);
 
 }
 
@@ -121,7 +125,11 @@ function questgen(){
         //add event listener for click, if target = correct answer, good, incorrect, bad.
         console.log(currentQuest.correct);
         optionList.addEventListener("click", function(e){
-            let selection = e.target;
+            let selection;
+            if (e.target.getAttribute("class") === "possibility") {
+                selection = e.target;
+            }
+            
             console.log(selection.innerHTML);
             if (selection.innerHTML === currentQuest.correct){
                 rightAnswers++;
