@@ -41,9 +41,47 @@ let questionsDone;
 let wrongAnswers = 0;
 let rightAnswers = 0;
 let moreQuestions = true;
+let optionList;
 
 function end() {
-    promptEd.innerHTML = "DONE!"
+    promptEd.innerHTML = "SCORE:"
+
+}
+
+function timer(){ setInterval(function() {
+        if(moreQuestions && timeRemaining > 0){
+            timeRemaining--;
+            console.log(timeRemaining);
+            countDownEd.innerHTML = timeRemaining;
+            
+            //create an array of question objects. set prompter as question, set options as ul with options.
+            
+
+            //if correct, next, add it to score
+
+            //if wrong, don't add to score, reduce 10 seconds.
+
+            //total score = correct answers * time remaining/10.
+
+            //if no more questions are in array, final screen
+
+            //if out of time, final screen
+
+        }
+
+        else if (timeRemaining === 0) {
+            clearInterval();
+            end();
+            optionList.remove()
+            return;
+            // add message and end function
+        }
+        
+        else if (!moreQuestions){
+            clearInterval();
+            return;
+        }
+    }, 1000);
 }
 
 // WHEN I click the start button
@@ -52,7 +90,7 @@ function questgen(){
         let randIndex = Math.floor(Math.random() * questArr.length);
         let currentQuest = questArr[randIndex];
         promptEd.innerHTML = currentQuest.question;
-        let optionList = document.createElement("ul");
+        optionList = document.createElement("ul");
         optionList.setAttribute("style", "padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; width: 50%; margin: 0 auto")
         let optionAzar;
         let possAnswers = [currentQuest.wrongOne, currentQuest.wrongTwo,
@@ -82,6 +120,7 @@ function questgen(){
             }
             else{
                 wrongAnswers++;
+                timeRemaining -= 10;
                 correct.innerHTML = "Incorrect!";
                 correct.setAttribute("style", "background-color: red; color: white; font-size: 3em; bottom: 0; padding: 30px; text-align: center; position: absolute; display: block;");
             };
@@ -91,7 +130,7 @@ function questgen(){
                 clearInterval();
                 
             }, 500);
-            
+
             questArr.splice(randIndex, 1);
             optionList.remove();
 
@@ -99,6 +138,7 @@ function questgen(){
                 questgen();
             }
             else{
+                moreQuestions = false;
                 end();
             }
 
@@ -114,31 +154,7 @@ startBtnEd.addEventListener("click", function(){
     instructEd.style.display = "none";
     countDownEd.style.display = "inline-block";
     questgen();
-    setInterval(function() {
-        timeRemaining--;
-        console.log(timeRemaining);
-        countDownEd.innerHTML = timeRemaining;
-        
-        //create an array of question objects. set prompter as question, set options as ul with options.
-        
-
-        //if correct, next, add it to score
-
-        //if wrong, don't add to score, reduce 10 seconds.
-
-        //total score = correct answers * time remaining/10.
-
-        //if no more questions are in array, final screen
-
-        //if out of time, final screen
-
-
-        if (timeRemaining === 0) {
-
-            // add message and end function
-        }
-        
-    }, 1000);
+    timer();
     
 
 // THEN a timer starts and I am presented with a question
