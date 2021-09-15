@@ -43,23 +43,69 @@ let wrongAnswers = 0;
 let rightAnswers = 0;
 let moreQuestions = true;
 let optionList;
+let previousScores = "";
+let previousPlayers = "";
+
+function scoreScreen() {
+    promptEd.innerHTML = "PREVIOUS SCORES:"
+    let recentUser = document.createElement('h2');
+    let recentScore = document.createElement('h2');
+    recentUser.innerHTML = localStorage.getItem("Users");
+    recentScore.innerHTML = localStorage.getItem("Scores");
+    recentUser.setAttribute("style", "font-size: 3em");
+    recentScore.setAttribute("style", "font-size: 3em");
+    scoreScreenEd.appendChild(recentUser);
+    scoreScreenEd.appendChild(recentScore);
+    let endButtons = document.createElement('div');
+    endButtons.setAttribute("style", "display: flex; justify-content: space-between; width: 500px; margin-top: 50px");
+    scoreScreenEd.appendChild(endButtons);
+    let startOver = document.createElement('button');
+    startOver.innerHTML = "Play Again?";
+    endButtons.appendChild(startOver);
+    let resetScore = document.createElement('button');
+    resetScore.innerHTML = "Reset Score";
+    endButtons.appendChild(resetScore);
+
+   
+
+
+}
 
 function end() {
     scoreScreenEd.setAttribute("style", "display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; flex-direction: column;");
     promptEd.innerHTML = "SCORE:"
     let score = document.createElement("h2");
     score.innerHTML = rightAnswers*timeRemaining/10;
-    score.setAttribute("style", "margin-top: 15px; font-size: 2em;")
+    score.setAttribute("style", "margin-top: 15px; font-size: 3em; margin-bottom: 20px;")
     scoreScreenEd.appendChild(score);
     let initials = document.createElement("input");
-    initials.setAttribute("placeholder", "Write initials here.")
-    initials.setAttribute("style", "margin-top: 15px")
+    initials.setAttribute("placeholder", "Enter initials here.")
+    initials.setAttribute("style", "margin-top: 40px, height: 400px; width: 400px;")
     scoreScreenEd.appendChild(initials);
     let toScoreBtn = document.createElement("button");
     toScoreBtn.innerHTML = "NEXT";
     toScoreBtn.setAttribute("style", "margin-top: 15px")
     scoreScreenEd.appendChild(toScoreBtn);
 
+   
+
+    toScoreBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (initials.value.length < 5){
+        previousScores = score.innerHTML; 
+        previousPlayers = initials.value; 
+        console.log(previousScores);
+        console.log(previousPlayers);
+        localStorage.setItem("Scores", previousScores);
+        localStorage.setItem("Users", previousPlayers);
+        initials.setAttribute("style", "display: none;")
+        toScoreBtn.setAttribute("style", "display: none;")
+        score.setAttribute("style", "display: none;")
+        scoreScreen();
+    };
+
+} )
 }
 
 function timer(){ setInterval(function() {
