@@ -19,7 +19,7 @@ let questionOne = {
 let questionTwo = {
     question: "Which is an example of a pseudoelement?",
     wrongOne: "Titani-eh",
-    wrongTwo: "<title></title>",
+    wrongTwo: "title",
     wrongThree: "No such thing exists",
     correct: "::after",
 };
@@ -41,20 +41,21 @@ function questgen(){
         let currentQuest = questArr[randIndex];
         promptEd.innerHTML = currentQuest.question;
         let optionList = document.createElement("ul");
+        optionList.setAttribute("style", "padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; width: 50%; margin: 0 auto")
         let optionAzar;
         let possAnswers = [currentQuest.wrongOne, currentQuest.wrongTwo,
          currentQuest.wrongThree, currentQuest.correct];
-         for (let i = 0; i < possAnswers.length; i++){
+         while (possAnswers.length){
             let indexAzar = Math.floor(Math.random() * possAnswers.length);
              optionAzar = document.createElement("li");
              optionAzar.innerHTML = possAnswers[indexAzar];
+             optionAzar.setAttribute("style", "border: solid black 2px; padding: 5px 10px; background-color: purple; color: white; cursor: grab")
+             optionAzar.setAttribute("class", "possibility")
              possAnswers.splice(indexAzar, 1);
              optionList.appendChild(optionAzar);
          }
         optionsEd.appendChild(optionList);
-//         for (let i = 0; i < chosenWord.length; i++){
-//           words.innerHTML += "_ ";
-//             words.innerHTML.splice(i, 1, key)
+//         
     
    
 }
