@@ -6,6 +6,12 @@ let countDownEd = document.getElementById("count-down");
 
 let timeRemaining = 61;
 
+// create objects containing questions and answers.
+let questionOne = {
+    question: "What language is used for styling elements?"
+    wrongOne: ""
+}
+
 // WHEN I click the start button
 startBtnEd.addEventListener("click", function(){
     
@@ -14,6 +20,19 @@ startBtnEd.addEventListener("click", function(){
         timeRemaining--;
         console.log(timeRemaining);
         countDownEd.innerHTML = timeRemaining;
+
+        //create an array of question objects. set prompter as question, set options as ul with options.
+
+        //if correct, next, add it to score
+
+        //if wrong, don't add to score, reduce 10 seconds.
+
+        //total score = correct answers * time remaining/10.
+
+        //if no more questions are in array, final screen
+
+        //if out of time, final screen
+
 
         if (timeRemaining === 0) {
 
