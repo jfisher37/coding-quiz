@@ -66,6 +66,18 @@ function scoreScreen() {
     resetScore.innerHTML = "Reset Score";
     endButtons.appendChild(resetScore);
 
+    resetScore.addEventListener("click", function(){
+        localStorage.setItem("Scores", "");
+        localStorage.setItem("Users", "");
+        recentUser.innerHTML = "";
+        recentScore.innerHTML = "";
+        return;
+    });
+
+    startOver.addEventListener("click", function(){
+        location.reload()
+    })
+
    
 
 
