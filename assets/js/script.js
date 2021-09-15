@@ -4,6 +4,7 @@ let promptEd = document.getElementById("prompter");
 let instructEd = document.getElementById("instructions");
 let countDownEd = document.getElementById("count-down");
 let optionsEd = document.getElementById("options");
+let correctEd = document.getElementById("correct")
 
 let timeRemaining = 61;
 
@@ -39,6 +40,11 @@ let questArr = [questionOne, questionTwo, questionThree];
 let questionsDone;
 let wrongAnswers = 0;
 let rightAnswers = 0;
+let moreQuestions = true;
+
+function end() {
+    promptEd.innerHTML = "DONE!"
+}
 
 // WHEN I click the start button
 //create a function that puts up questions
@@ -60,6 +66,8 @@ function questgen(){
              possAnswers.splice(indexAzar, 1);
              optionList.appendChild(optionAzar);
          }
+    
+             
         optionsEd.appendChild(optionList);
 
         //add event listener for click, if target = correct answer, good, incorrect, bad.
@@ -69,7 +77,31 @@ function questgen(){
             console.log(selection.innerHTML);
             if (selection.innerHTML === currentQuest.correct){
                 rightAnswers++;
+                correct.innerHTML = "Correct!";
+                correct.setAttribute("style", "background-color: green; color: white; font-size: 3em; bottom: 0; padding: 30px; text-align: center; position: absolute; display: block;");
             }
+            else{
+                wrongAnswers++;
+                correct.innerHTML = "Incorrect!";
+                correct.setAttribute("style", "background-color: red; color: white; font-size: 3em; bottom: 0; padding: 30px; text-align: center; position: absolute; display: block;");
+            };
+            setInterval(function() {
+                correct.innerHTML = "";
+                correct.setAttribute("style", "display: none;")
+                clearInterval();
+                
+            }, 500);
+            
+            questArr.splice(randIndex, 1);
+            optionList.remove();
+
+            if (questArr.length) {
+                questgen();
+            }
+            else{
+                end();
+            }
+
             console.log(rightAnswers);
         })
 
